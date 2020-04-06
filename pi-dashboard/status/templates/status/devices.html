@@ -1,0 +1,41 @@
+{% extends "status/base.html" %}
+{% load static %}
+{% block content %}
+	<p class="text-center"><strong>Dummy Data For Testing</strong></p>
+
+	<style>
+	table, th, td {
+	    border: 1px solid black;
+	    border-collapse: collapse;
+	    padding-right: 10px;
+	    padding-left: 10px;
+	}
+	th, td { 
+	    text-align: center;
+	}
+	</style>
+	<table style="width:100%">
+	<tr>
+		<th>Hostname</th>
+		<th>IPv4 Address</th>
+		<th>IPv6 Address</th>
+		<th>MAC Address</th>
+		<th>Bandwidth In</th>
+		<th>Bandwidth Out</th>
+		<th>Bandwidth Total</th>
+		<th>Last seen</th>
+	</tr>
+	{% for post in posts %}
+	<tr>
+	    <td> {{ post.hostname }} </td>
+	    <td> {{ post.ip4_address }} </td>
+	    <td> {{ post.ip6_address }} </td>
+	    <td> {{ post.mac_address }} </td>
+	    <td> {{ post.bandw_in }} </td>
+	    <td> {{ post.bandw_out }} </td>
+	    <td> {{ post.bandw_total }} </td>
+	    <td> {{ post.last_seen }} </td>
+	</tr>
+	{% endfor %}
+	</table>
+{% endblock content %}
