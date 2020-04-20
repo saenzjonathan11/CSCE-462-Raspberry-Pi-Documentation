@@ -37,5 +37,18 @@
 	    <td> {{ post.last_seen }} </td>
 	</tr>
 	{% endfor %}
+
+	{% for systemInfo in systemInfos %}
+	<h3>{{ systemInfo.hostapStatus }}</h3>
+	<h3>{{ systemInfo.cpuTemp }}</h3>
+	<h3>{{ systemInfo.memFree }}</h3>
+	<h3>rx Packets: {{ systemInfo.rxPackets }}</h3>
+	<h3>rx Bytes: {{ systemInfo.rxBytes }}</h3>
+	<h3>tx Packets: {{ systemInfo.txPackets }}</h3>
+	<h3>tx Bytes: {{ systemInfo.txBytes }}</h3>
+	<h3>wlan0: {{ systemInfo.nicInfo }}</h3>
+	<h3>Devices: {{ systemInfo.connectedDevices }}</h3>
+	{% endfor %}
+
 	</table>
 {% endblock content %}
