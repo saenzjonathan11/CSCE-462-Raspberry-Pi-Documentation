@@ -2,50 +2,123 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'status/css/style.css' %}">
-    {% if title %}
-	    <title>RPi Router | {{ title }}</title>
-    {% else %}
-	    <title>RPi Router</title>
-    {% endif %}
+  <!-- About meta tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Bootstrap core CSS -->
+  <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" type="text/css" href="{% static 'status/css/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'status/css/sidebar.css' %}">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'status/css/sidebar.css' %}">
+
+  {% if title %}
+    <title>Pi-N-Route | {{ title }}</title>
+  {% else %}
+    <title>Pi-N-Route</title>
+  {% endif %}
+
   </head>
   <body>
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'status:index' %}">RPi Router</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{% url 'status:index' %}">Home</a>
-              <a class="nav-item nav-link" href="{% url 'status:devices' %}">Devices</a>
-              <a class="nav-item nav-link" href="{% url 'status:about' %}">About</a>
-            </div>
-            <!-- Navbar Right Side -->
-            <div class="navbar-nav">
-              <a class="nav-item nav-link" href="#">Login</a>
-              <a class="nav-item nav-link" href="#">Register</a>
-            </div>
+    <style>
+    </style>
+
+
+  <div class="d-flex toggled" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right d-none d-md-block" id="sidebar-wrapper">
+      <div class="sidebar-heading">Pi-N-Route</div>
+      <div class="list-group list-group-flush">
+        <a href="{% url 'status:dashboard' %}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+        <a href="{% url 'status:hotspot' %}" class="list-group-item list-group-item-action bg-light">Hotspot</a>
+        <a href="{% url 'status:interfaces' %}" class="list-group-item list-group-item-action bg-light">Network Interfaces</a>
+        <a href="{% url 'status:dhcp_dns' %}" class="list-group-item list-group-item-action bg-light">DHCP and DNS</a>
+        <a href="{% url 'status:system' %}" class="list-group-item list-group-item-action bg-light">System</a>
+        <!-- <a href="{% url 'status:authentication' %}" class="list-group-item list-group-item-action bg-light">Authentication</a> -->
+        <a href="{% url 'status:about' %}" class="list-group-item list-group-item-action bg-light">About</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <button class="btn-circle btn-lg d-none d-md-block ml-1" id="menu-toggle"><i id="arrow" class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+      <!--Navbar-->
+      <nav class="navbar navbar-light purple lighten-4 mb-4 d-none d-block d-md-none">
+
+        <div></div>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler toggler-example purple darken-3" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent41" aria-controls="navbarSupportedContent41" aria-expanded="false"
+          aria-label="Toggle navigation"><span class="white-text"><i class="fa fa-bars"></i></span></button>
+
+          <!-- Collapsible content -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent41">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a href="#" class="nav-link">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Hotspot</a>
+              </li>
+              <li class="nav-item">
+                <a href="interfaces.html" class="nav-link">Network Interfaces</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">DHCP and DNS</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">System</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a href="#" class="nav-link">Authentication</a>
+              </li> -->
+              <li class="nav-item">
+                <a href="#" class="nav-link">About</a>
+              </li>
+            </ul>
+            <!-- Links -->
           </div>
-        </div>
+          <!-- Collapsible content -->
       </nav>
-    </header>
-    <div><br><br><br></div>
-    <main role="main" class="container">
-	    {% block content %}{% endblock %}
-    </main>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <!--/.Navbar-->
+      {% block content %}{% endblock %}
+    </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+  <!-- /#wrapper -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#arrow").toggleClass("fa-arrow-right fa-arrow-left")
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
   </body>
 </html>

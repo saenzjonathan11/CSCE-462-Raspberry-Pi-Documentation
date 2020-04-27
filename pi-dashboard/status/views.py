@@ -14,6 +14,7 @@ rx_bytes = os.popen('cat /sys/class/net/wlan0/statistics/rx_bytes').readline()
 iw_wlan0 = os.popen('iw dev wlan0 info').readlines()
 devices = os.popen('cat /var/lib/misc/dnsmasq.leases').readlines()
 
+
 system_infos = [
         {
             'hostapStatus': hostap_status,
@@ -42,15 +43,80 @@ posts = [
 ]
 
 def index(request):
+    # interfacesList = [x.strip() for x in os.popen('ls /sys/class/net | grep -v lo').readlines()]
+    interfacesList = [x.strip() for x in os.popen('ls /sys/class/net').readlines()]
+    ifconfigOut = os.popen('ifconfig').readlines()
+    tmpInterface = ""
+    interfacesStrs = []
+    for interface in ifconfigOut:
+        if interface == '\n':
+            interfacesStrs.append(tmpInterface)
+            tmpInterface = ""
+        else:
+            tmpInterface += interface
+
+    zipInterfaces = zip(interfacesList,interfacesStrs)
+
     context = {
         'posts': posts,
-        'systemInfos': system_infos
+        'systemInfos': system_infos,
+        'interfacesList': interfacesList,
+        'zipInterfaces': zipInterfaces
+        # 'interfacesStrs': interfacesStrs,
+        # 'interfacesList': interfacesList
     }
     return render(request, 'status/index.html',context)
     #return render(request, 'status/index.html', context)
 
+def dashboard(request):
+    return render(request, 'status/dashboard.html')
+
+def hotspot(request):
+
+    
+    return render(request, 'status/hotspot.html')
+
+
+
+
+def interfaces(request):
+    interfacesList = [x.strip() for x in os.popen('ls /sys/class/net').readlines()]
+    ifconfigOut = os.popen('ifconfig').readlines()
+    tmpInterface = ""
+    interfacesStrs = []
+    for interface in ifconfigOut:
+        if interface == '\n':
+            interfacesStrs.append(tmpInterface)
+            tmpInterface = ""
+        else:
+            tmpInterface += interface
+
+    zipInterfaces = zip(interfacesList,interfacesStrs)
+
+    context = {
+        'posts': posts,
+        'systemInfos': system_infos,
+        'interfacesList': interfacesList,
+        'zipInterfaces': zipInterfaces
+    }
+    return render(request, 'status/interfaces.html', context)
+
+
+def dhcp_dns(request):
+    return render(request, 'status/dhcp_dns.html')
+
+def authentication(request):
+    return render(request, 'status/system.html')
+
+def system(request):
+    return render(request, 'status/system.html')
+
 def about(request):
     return render(request, 'status/about.html')
+
+def device(request, device_num):
+    response = "You're looking at the result of device %s."
+    return HttpResponse(response % device_num) 
 
 def devices(request):
     context = {
@@ -58,6 +124,3 @@ def devices(request):
     }
     return render(request, 'status/devices.html', context)
 
-def device(request, device_num):
-    response = "You're looking at the result of device %s."
-    return HttpResponse(response % device_num) 

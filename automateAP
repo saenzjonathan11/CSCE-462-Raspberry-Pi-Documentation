@@ -11,6 +11,7 @@ sudo systemctl restart dhcpcd
 echo "# config file for AP" >> /etc/hostapd/hostapd.conf
 echo "ssid=csce462-Demo" >> /etc/hostapd/hostapd.conf
 echo "wpa_passphrase=abc12308" >> /etc/hostapd/hostapd.conf # has to at least have 8 length
+echo "country_code=US" >> /etc/hostapd/hostapd.conf
 echo "interface=wlan0" >> /etc/hostapd/hostapd.conf
 echo "driver=nl80211" >> /etc/hostapd/hostapd.conf
 echo "hw_mode=g" >> /etc/hostapd/hostapd.conf

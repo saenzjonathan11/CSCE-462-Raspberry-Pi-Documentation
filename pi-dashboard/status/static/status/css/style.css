@@ -1,3 +1,18 @@
-body {
-    background:white url("/static/status/img/background.jpg") no-repeat;
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+  border: solid;
+}
+.nav-tabs > .nav-link.active {
+  color: #000000;
+}
+.nav-link:hover {
+  color: #000000;
+}
+.nav-link {
+  color: grey;
 }
