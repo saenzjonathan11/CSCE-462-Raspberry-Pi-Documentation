@@ -65,7 +65,7 @@ def dashboard(request):
 
     for device in devices:
         deviceInfo = device.split(" ")
-        if deviceInfo[0] != '?' and deviceInfo[4] != '<incomplete>':
+        if deviceInfo[0] != '?' and deviceInfo[4] != '<incomplete>' and deviceInfo[1] != '(1.1.1.1)':
             devicesLL.append({})
             devicesLL[i]["hostname"] = deviceInfo[0]
             devicesLL[i]["ip"] = deviceInfo[1][1:-1]
