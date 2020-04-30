@@ -58,9 +58,24 @@ def index(request):
     return render(request, 'status/index.html',context)
 
 def dashboard(request):
-    devices = os.popen('ifconfig').readlines()
+    devices = os.popen('arp -a').readlines()
+    # devicesLL = [{},{},{},{},{}]
+    devicesLL = []
+    i = 0
 
-    return render(request, 'status/dashboard.html')
+    for device in devices:
+        deviceInfo = device.split(" ")
+        if deviceInfo[0] != '?' and deviceInfo[4] != '<incomplete>':
+            devicesLL.append({})
+            devicesLL[i]["hostname"] = deviceInfo[0]
+            devicesLL[i]["ip"] = deviceInfo[1][1:-1]
+            devicesLL[i]["mac"] = deviceInfo[3].strip()
+            i += 1
+    context = {
+        "devices": devicesLL
+    }
+
+    return render(request, 'status/dashboard.html', context)
 
 def hotspot(request):
 

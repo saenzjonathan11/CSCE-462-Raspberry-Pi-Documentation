@@ -14,26 +14,22 @@
 						<nav>
 							<div class="nav nav-tabs" id="nav-tab" role="tablist">
 								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Devices</a>
-								{% for interface in interfacesList %}
-									{% if interface != 'lo' %}
-										<!-- <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{{interface}}</a> -->
-									{% endif %}
-								{% endfor %}
 							</div>
 						</nav>
 						<div class="tab-content" id="nav-tabContent">
 							<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 								<div class="row">
-								{% for key, interfaceStr in zipInterfaces %}
-									{% if key != 'lo' %}
-									<div class="col-md-6 mt-2">
+								{% for device in devices %}
+									<div class="col-sm-12 col-md-5 col-lg-4 mt-2">
 										<div class="card">
-											<div class="card-header">{{key}}</div>
-											<div class="card-body" style="white-space: pre-wrap;">{{ interfaceStr }}</div>
+											<div class="card-header">Device Number: {{forloop.counter}}</div>
+											<!-- <div class="card-body" style="white-space: pre-wrap;"> -->
+												<p class="card-text ml-2">Hostname: {{device.hostname}}<br>IP Address: {{device.ip}}<br>MAC Address: {{device.mac}}</p>
+											<!-- </div> -->
 										</div>
 									</div>
-									{% endif %}
 								{% endfor %}
+
 								</div>
 							</div>
 							<!-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">I am here</div>
