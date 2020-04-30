@@ -73,11 +73,12 @@ def dashboard(request):
     context = {
         "devices": devicesLL
     }
+    os.system("sudo vnstat -u -i wlan0")
     os.system("rm status/static/status/img/summary1.png")
-    os.system("rm status/static/status/img/summary2.png")
+    # os.system("rm status/static/status/img/summary2.png")
     os.system("rm status/static/status/img/summary3.png")
     os.system("vnstati -vs -c 1 -i wlan0 -o status/static/status/img/summary1.png")
-    os.system("vnstati -h -i wlan0 -o status/static/status/img/summary2.png")
+    # os.system("vnstati -h -i wlan0 -o status/static/status/img/summary2.png")
     os.system("vnstati -s -i wlan0+eth0 -o status/static/status/img/summary3.png")
 
     return render(request, 'status/dashboard.html', context)
