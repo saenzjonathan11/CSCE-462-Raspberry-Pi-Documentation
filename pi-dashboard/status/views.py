@@ -59,13 +59,12 @@ def index(request):
 
 def dashboard(request):
     devices = os.popen('arp -a').readlines()
-    # devicesLL = [{},{},{},{},{}]
     devicesLL = []
     i = 0
 
     for device in devices:
         deviceInfo = device.split(" ")
-        if deviceInfo[0] != '?' and deviceInfo[4] != '<incomplete>' and deviceInfo[1] != '(1.1.1.1)':
+        if deviceInfo[0] != '?' and deviceInfo[3] != '<incomplete>' and deviceInfo[1] != '(1.1.1.1)':
             devicesLL.append({})
             devicesLL[i]["hostname"] = deviceInfo[0]
             devicesLL[i]["ip"] = deviceInfo[1][1:-1]
@@ -74,6 +73,12 @@ def dashboard(request):
     context = {
         "devices": devicesLL
     }
+    os.system("rm status/static/status/img/summary1.png")
+    os.system("rm status/static/status/img/summary2.png")
+    os.system("rm status/static/status/img/summary3.png")
+    os.system("vnstati -vs -c 1 -i wlan0 -o status/static/status/img/summary1.png")
+    os.system("vnstati -h -i wlan0 -o status/static/status/img/summary2.png")
+    os.system("vnstati -s -i wlan0+eth0 -o status/static/status/img/summary3.png")
 
     return render(request, 'status/dashboard.html', context)
 
