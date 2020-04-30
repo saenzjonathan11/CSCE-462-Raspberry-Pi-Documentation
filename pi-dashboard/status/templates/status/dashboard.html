@@ -7,13 +7,13 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="row">
-						<div class="col">Hotspot</div>
-						<div class="col text-right">Is up</div>
+						<div class="col">Dashboard</div>
+						<div class="col text-right"></div>
 					</div>
 					<div class="card-body">
 						<nav>
 							<div class="nav nav-tabs" id="nav-tab" role="tablist">
-								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Summary</a>
+								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Devices</a>
 								{% for interface in interfacesList %}
 									{% if interface != 'lo' %}
 										<!-- <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{{interface}}</a> -->
@@ -34,7 +34,6 @@
 									</div>
 									{% endif %}
 								{% endfor %}
-
 								</div>
 							</div>
 							<!-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">I am here</div>

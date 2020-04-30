@@ -49,7 +49,7 @@
         <a href="{% url 'status:interfaces' %}" class="list-group-item list-group-item-action bg-light">Network Interfaces</a>
         <a href="{% url 'status:dhcp_dns' %}" class="list-group-item list-group-item-action bg-light">DHCP and DNS</a>
         <a href="{% url 'status:system' %}" class="list-group-item list-group-item-action bg-light">System</a>
-        <!-- <a href="{% url 'status:authentication' %}" class="list-group-item list-group-item-action bg-light">Authentication</a> -->
+        <!-- <a href="{# url 'status:authentication' #}" class="list-group-item list-group-item-action bg-light">Authentication</a> -->
         <a href="{% url 'status:about' %}" class="list-group-item list-group-item-action bg-light">About</a>
       </div>
     </div>
@@ -75,25 +75,25 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a href="#" class="nav-link">Dashboard</a>
+                <a href="{% url 'status:dashboard' %}" class="nav-link">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Hotspot</a>
+                <a href="{% url 'status:hotspot' %}" class="nav-link">Hotspot</a>
               </li>
               <li class="nav-item">
-                <a href="interfaces.html" class="nav-link">Network Interfaces</a>
+                <a href="{% url 'status:interfaces' %}" class="nav-link">Network Interfaces</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">DHCP and DNS</a>
+                <a href="{% url 'status:dhcp_dns' %}" class="nav-link">DHCP and DNS</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">System</a>
+                <a href="{% url 'status:system' %}" class="nav-link">System</a>
               </li>
               <!-- <li class="nav-item">
                 <a href="#" class="nav-link">Authentication</a>
               </li> -->
               <li class="nav-item">
-                <a href="#" class="nav-link">About</a>
+                <a href="{% url 'status:about' %}" class="nav-link">About</a>
               </li>
             </ul>
             <!-- Links -->

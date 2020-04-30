@@ -14,28 +14,68 @@
 						<nav>
 							<div class="nav nav-tabs" id="nav-tab" role="tablist">
 								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Settings</a>
-                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Security</a>
-								{% for interface in interfacesList %}
-									{% if interface != 'lo' %}
-									{% endif %}
-								{% endfor %}
+								<!-- <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Security</a> -->
 							</div>
 						</nav>
 						<div class="tab-content" id="nav-tabContent">
 							<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 								<div class="row">
-								<!-- {% for key, interfaceStr in zipInterfaces %}
-									{% if key != 'lo' %}
-									<div class="col-md-6 mt-2">
+									<div class="col-md-10 col-lg-6 mt-2">
 										<div class="card">
-											<div class="card-header">{{key}}</div>
-											<div class="card-body" style="white-space: pre-wrap;">{{ interfaceStr }}</div>
+											<div class="card-header">Interface: wlan0</div>
+											<div class="card-body" style="white-space: pre-wrap;">{{apInterface}}</div>
 										</div>
 									</div>
-									{% endif %}
-								{% endfor %} -->
+									<div class="w-100"></div>
+									<div class="col-md-10 col-lg-6 mt-2">
+										<div class="card">
+											<div class="card-header">SSID</div>
+											<div class="card-body" style="white-space: pre-wrap;">{{apSSID}}</div>
+										</div>
+									</div>
+									<div class="w-100"></div>
+									<div class="col-md-10 col-lg-6 mt-2">
+										<div class="card">
+											<div class="card-header">Channel</div>
+											<div class="card-body" style="white-space: pre-wrap;">{{apChannel}}</div>
+										</div>
+									</div>
+									<div class="w-100"></div>
+									<div class="col-md-10 col-lg-6 mt-2">
+										<div class="card">
+											<div class="card-header">Wireless Mode</div>
+											<div class="card-body" style="white-space: pre-wrap;">{{apHwMode}}</div>
+										</div>
+									</div>
+									<div class="w-100"></div>
+									<div class="col-md-10 col-lg-6 mt-2">
+										<div class="card">
+											<div class="card-header">Country Code</div>
+											<div class="card-body" style="white-space: pre-wrap;">{{apCountryCode}}</div>
+										</div>
+									</div>
 								</div>
 							</div>
+
+							<script>
+								function toggleHotspot() {
+									let startButton = document.getElementById('startHotspot')
+									let stopButton = document.getElementById('stopHotspot')
+									// console.log(stopButton.style)
+									// console.log(stopButton.style.display == "inline-block")
+									if (stopButton.style.display == "inline-block") {
+										startButton.style.display = "inline-block"
+										stopButton.style.display = "none"
+									} else {
+										stopButton.style.display = "inline-block"
+										startButton.style.display = "none"
+									}
+
+								}
+							</script>
+							<button style="display:inline-block" id="stopHotspot" onclick="toggleHotspot()" type="button" class="btn btn-danger mt-2">Stop Hotspot</button>
+							<button style="display:none" id="startHotspot" onclick="toggleHotspot()" type="button" class="btn btn-success mt-2">Start Hotspot</button>
+							<button type="button" class="btn btn-warning mt-2">Restart Hotspot</button>
 							<!-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">I am here</div>
 							<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">I am here</div> -->
 						</div>
