@@ -75,10 +75,8 @@ def dashboard(request):
     }
     os.system("sudo vnstat -u -i wlan0")
     os.system("rm status/static/status/img/summary1.png")
-    # os.system("rm status/static/status/img/summary2.png")
     os.system("rm status/static/status/img/summary3.png")
     os.system("vnstati -vs -c 1 -i wlan0 -o status/static/status/img/summary1.png")
-    # os.system("vnstati -h -i wlan0 -o status/static/status/img/summary2.png")
     os.system("vnstati -s -i wlan0+eth0 -o status/static/status/img/summary3.png")
 
     return render(request, 'status/dashboard.html', context)
@@ -140,7 +138,49 @@ def interfaces(request):
     return render(request, 'status/interfaces.html', context)
 
 def dhcp_dns(request):
-    return render(request, 'status/dhcp_dns.html')
+
+    dnsmasqConf = [x.strip() for x in os.popen('cat /etc/dnsmasq.conf.test').readlines()]
+    leases = [x.strip() for x in os.popen('cat /var/lib/misc/dnsmasq.leases').readlines()]
+
+    interface = ""
+    dhcp_range = ""
+    start_ip = ""
+    last_ip = ""
+    lease_time = ""
+    dns_server1 = ""
+
+    for line in dnsmasqConf:
+        if (re.search('(?<=^interface=).*', line)):
+            interface = re.search('(?<=^interface=).*', line).group()
+        if (re.search('(?<=^server=).*', line)):
+            dns_server1 = re.search('(?<=^server=).*',line).group()
+        if (re.search('(?<=^dhcp-range=).*', line)):
+            dhcp_range = re.search('(?<=^dhcp-range=).*',line).group()
+
+    start_ip = dhcp_range.split(",")[0]
+    last_ip = dhcp_range.split(",")[1]
+    lease_time = dhcp_range.split(",")[2]
+    clients = []
+
+    for i,lease in zip(range(0,len(leases)),leases):
+        clients.append({})
+        clients[i]["hostname"] = lease.split(" ")[3]
+        clients[i]["clientIP"] = lease.split(" ")[2]
+        clients[i]["clientMAC"] = lease.split(" ")[1]
+        clients[i]["clientID"] = lease.split(" ")[4]
+        clients[i]["expireTime"] = lease.split(" ")[0]
+
+    context = {
+        'interface': interface,
+        'startAddress': start_ip,
+        'lastAddress': last_ip,
+        'leaseTime': lease_time,
+        'dnsServer': dns_server1,
+        'clients': clients
+    }
+
+    return render(request, 'status/dhcp_dns.html', context)
+
 
 # def authentication(request):
 #     return render(request, 'status/system.html')

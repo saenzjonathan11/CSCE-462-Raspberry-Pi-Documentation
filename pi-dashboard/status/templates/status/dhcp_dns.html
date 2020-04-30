@@ -7,34 +7,91 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="row">
-						<div class="col">Hotspot</div>
+						<div class="col">DHCP and DNS</div>
 						<div class="col text-right">Is up</div>
 					</div>
 					<div class="card-body">
 						<nav>
 							<div class="nav nav-tabs" id="nav-tab" role="tablist">
 								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Summary</a>
-								{% for interface in interfacesList %}
-									{% if interface != 'lo' %}
-										<!-- <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{{interface}}</a> -->
-									{% endif %}
-								{% endfor %}
+								<a class="nav-item nav-link" id="nav-statistics-tab" data-toggle="tab" href="#nav-statistics" role="tab" aria-controls="nav-profile" aria-selected="false">DHCP Lease</a>
 							</div>
 						</nav>
+
 						<div class="tab-content" id="nav-tabContent">
 							<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 								<div class="row">
-								{% for key, interfaceStr in zipInterfaces %}
-									{% if key != 'lo' %}
-									<div class="col-md-6 mt-2">
+									<div class="col-md-10 col-lg-6 mt-2">
 										<div class="card">
-											<div class="card-header">{{key}}</div>
-											<div class="card-body" style="white-space: pre-wrap;">{{ interfaceStr }}</div>
+											<div class="card-header p-2">Interface</div>
+											<div class="card-body p-1" style="white-space: pre-wrap;">{{interface}}</div>
 										</div>
 									</div>
-									{% endif %}
-								{% endfor %}
+									<div class="w-100"></div>
 
+									<div class="col-md-10 col-lg-6 mt-2">
+										<div class="card">
+											<div class="card-header p-2">Starting IP Address</div>
+											<div class="card-body p-1" style="white-space: pre-wrap;">{{startAddress}}</div>
+										</div>
+									</div>
+									<div class="w-100"></div>
+
+									<div class="col-md-10 col-lg-6 mt-2">
+										<div class="card">
+											<div class="card-header p-2">Ending IP Address</div>
+											<div class="card-body p-1" style="white-space: pre-wrap;">{{lastAddress}}</div>
+										</div>
+									</div>
+									<div class="w-100"></div>
+
+									<div class="col-md-10 col-lg-6 mt-2">
+										<div class="card">
+											<div class="card-header p-2">Lease Time</div>
+											<div class="card-body p-1" style="white-space: pre-wrap;">{{leaseTime}}</div>
+										</div>
+									</div>
+									<div class="w-100"></div>
+
+									<div class="col-md-10 col-lg-6 mt-2">
+										<div class="card">
+											<div class="card-header p-2">DNS Server</div>
+											<div class="card-body p-1" style="white-space: pre-wrap;">{{dnsServer}}</div>
+										</div>
+									</div>
+									<div class="w-100"></div>
+
+								</div>
+
+							</div>
+							<div class="tab-pane fade" id="nav-statistics" role="tabpanel" aria-labelledby="nav-statistics-tab">
+								<div class="row">
+									<div class="col-12 mt-2">
+										<div class="card">
+											<table class="table">
+												<thead class="thead-light">
+													<tr>
+														<th>Hostname</th>
+														<th>IP Address</th>
+														<th>MAC Address</th>
+														<th>Client ID</th>
+														<th>Expire Time</th>
+													</tr>
+												</thead>
+												<tbody>
+													{% for client in clients %}
+													<tr>
+														<td>{{client.hostname}}</td>
+														<td>{{client.clientIP}}</td>
+														<td>{{client.clientMAC}}</td>
+														<td>{{client.clientID}}</td>
+														<td>{{client.expireTime}}</td>
+													</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+										</div>
+									</div>
 								</div>
 							</div>
 							<!-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">I am here</div>
