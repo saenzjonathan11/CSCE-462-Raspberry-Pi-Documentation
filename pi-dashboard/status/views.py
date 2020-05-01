@@ -73,7 +73,7 @@ def dashboard(request):
     context = {
         "devices": devicesLL
     }
-    os.system("sudo vnstat -u -i wlan0")
+    # os.system("sudo vnstat -u -i wlan0")
     os.system("rm status/static/status/img/summary1.png")
     os.system("rm status/static/status/img/summary3.png")
     os.system("vnstati -vs -c 1 -i wlan0 -o status/static/status/img/summary1.png")
@@ -139,7 +139,7 @@ def interfaces(request):
 
 def dhcp_dns(request):
 
-    dnsmasqConf = [x.strip() for x in os.popen('cat /etc/dnsmasq.conf.test').readlines()]
+    dnsmasqConf = [x.strip() for x in os.popen('cat /etc/dnsmasq.conf').readlines()]
     leases = [x.strip() for x in os.popen('cat /var/lib/misc/dnsmasq.leases').readlines()]
 
     interface = ""

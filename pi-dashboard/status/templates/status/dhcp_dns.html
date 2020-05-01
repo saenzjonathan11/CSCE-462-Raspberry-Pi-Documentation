@@ -8,7 +8,6 @@
 				<div class="card-header">
 					<div class="row">
 						<div class="col">DHCP and DNS</div>
-						<div class="col text-right">Is up</div>
 					</div>
 					<div class="card-body">
 						<nav>
@@ -65,37 +64,26 @@
 
 							</div>
 							<div class="tab-pane fade" id="nav-statistics" role="tabpanel" aria-labelledby="nav-statistics-tab">
-								<div class="row">
-									<div class="col-12 mt-2">
-										<div class="card">
-											<table class="table">
-												<thead class="thead-light">
-													<tr>
-														<th>Hostname</th>
-														<th>IP Address</th>
-														<th>MAC Address</th>
-														<th>Client ID</th>
-														<th>Expire Time</th>
-													</tr>
-												</thead>
-												<tbody>
-													{% for client in clients %}
-													<tr>
-														<td>{{client.hostname}}</td>
-														<td>{{client.clientIP}}</td>
-														<td>{{client.clientMAC}}</td>
-														<td>{{client.clientID}}</td>
-														<td>{{client.expireTime}}</td>
-													</tr>
-													{% endfor %}
-												</tbody>
-											</table>
-										</div>
+								<div class="container">
+									<div class="row">
+										<div class="col">Hostname</div>
+										<div class="col">IP Address</div>
+										<div class="col">MAC Address</div>
+										<div class="col">Client ID</div>
+										<div class="col">Expire Time</div>
 									</div>
+									{% for client in clients %}
+										<!-- <div class="w-100"></div> -->
+									<div class="row" style="border-top:1px solid gray;">
+										<div class="col">{{client.hostname}}</div>
+										<div class="col">{{client.clientIP}}</div>
+										<div class="col">{{client.clientMAC}}</div>
+										<div class="col">{{client.clientID}}</div>
+										<div class="col">{{client.expireTime}}</div>
+									</div>
+									{% endfor %}
 								</div>
 							</div>
-							<!-- <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">I am here</div>
-							<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">I am here</div> -->
 						</div>
 					</div>
 				</div>
